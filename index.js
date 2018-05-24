@@ -21,6 +21,8 @@ class SGFNode {
         this.children = null;
         this.gameInfo = null;
         this.parentNode = parent;
+        if (this.parentNode)
+            this.parentNode.children.push(this);
     }
 }
 
@@ -177,9 +179,9 @@ const __sgf_parse = (str) => {
                     // create a new node.
                     if (_curNode == null) {
                         var game = new SGFGame();
-                        _games.Add(game);
+                        _games.push(game);
                         _curGame = game;
-                        _curNode = _curGame.RootNode;
+                        _curNode = _curGame.rootNode;
                     }
                     else {
                         var node = new SGFNode(_curNode);
