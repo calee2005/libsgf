@@ -4,7 +4,7 @@
   "description": "A very fast javascript SGF(Smart Game Format) parser",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/calee2005/libsgf/issues"
   },
-  "homepage": "https://github.com/calee2005/libsgf#readme"
+  "homepage": "https://github.com/calee2005/libsgf#readme",
+  "devDependencies": {
+    "tap": "^12.0.1"
+  }
 }

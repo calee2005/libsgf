@@ -1,2 +1,2 @@
 # libsgf
-A very fast javascript SGF(Smart Game Format) parser
+A fast and hackable javascript SGF(Smart Game Format) library
