@@ -134,24 +134,6 @@ const __sgf_parse = (str) => {
     var _valueBuffer = '';
     var _pvlist = [];
 
-    const __create_node = () => {
-        if (_curNode == null) {
-            var game = new SGFGame();
-            _games.Add(game);
-            _curGame = game;
-            _curNode = _curGame.RootNode;
-        }
-        else {
-            var node = new SGFNode(_curNode);
-            _curNode = node;
-        }
-    };
-
-    const __add_property_value = () => {
-        _pvlist.push(_valueBuffer);
-        _valueBuffer = '';
-    };
-
     const __set_property = () => {
         var tag = _tagBuffer.toUpperCase();
         var setter = __SETTERS[tag];
@@ -167,9 +149,6 @@ const __sgf_parse = (str) => {
         _pvlist = [];
     };
 
-    const __push = () => { _stack.push(_curNode); };
-    const __pop = () => { _curNode = _stack.length != 0 ? _stack.pop() : null; };
-
     while(_idx < str.length) {
         const c = str.charAt(_idx++);
         switch(c) {
@@ -181,7 +160,7 @@ const __sgf_parse = (str) => {
                             __set_property();
 
                         // push last parent
-                        __push();
+                        _stack.push(_curNode);
                     }
 
                     _pos = TreeStart;
@@ -196,7 +175,16 @@ const __sgf_parse = (str) => {
                     _pos = NewNode;
 
                     // create a new node.
-                    __create_node();
+                    if (_curNode == null) {
+                        var game = new SGFGame();
+                        _games.Add(game);
+                        _curGame = game;
+                        _curNode = _curGame.RootNode;
+                    }
+                    else {
+                        var node = new SGFNode(_curNode);
+                        _curNode = node;
+                    }
                 }
                 break;
             case '[': // start of a property value
@@ -212,7 +200,8 @@ const __sgf_parse = (str) => {
                     _pos = PropEnd;
 
                     // add property value to the pvlist
-                    __add_property_value();
+                    _pvlist.push(_valueBuffer);
+                    _valueBuffer = '';
                 }
                 break;
             case ')': // end of a game tree
@@ -224,7 +213,7 @@ const __sgf_parse = (str) => {
                     _pos = TreeEnd;
 
                     // pop last sub-tree root
-                    __pop();
+                    _curNode = _stack.length != 0 ? _stack.pop() : null;
                 }
                 break;
             case '\\': // escape next char
