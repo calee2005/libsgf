@@ -1,0 +1,22 @@
+{
+  "name": "libsgf",
+  "version": "1.0.0",
+  "description": "A very fast javascript SGF(Smart Game Format) parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calee2005/libsgf.git"
+  },
+  "keywords": [
+    "SGF"
+  ],
+  "author": "Claude Lee <calee2005@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calee2005/libsgf/issues"
+  },
+  "homepage": "https://github.com/calee2005/libsgf#readme"
+}
