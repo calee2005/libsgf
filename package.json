@@ -1,6 +1,6 @@
 {
   "name": "libsgf",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A very fast javascript SGF(Smart Game Format) parser",
   "main": "index.js",
   "scripts": {
