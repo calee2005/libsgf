@@ -21,5 +21,8 @@
   "homepage": "https://github.com/calee2005/libsgf#readme",
   "devDependencies": {
     "tap": "^12.0.1"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
   }
 }
