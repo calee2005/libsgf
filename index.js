@@ -89,7 +89,7 @@ const __sgf_game_info_setter = (key) => { return (g, n, vl) => { g.info[key] = v
 
 const __sgf_node_setupstones_setter = (color) => { return (g, n, vl) => {
     var positions = [];
-    for (var p in vl) {
+    for (var p of vl) {
         switch(p.length) {
             case 2:
                 positions.push(__sgf_parse_position_unsafe(p));
@@ -128,7 +128,7 @@ const __sgf_node_symbol_markup_setter = (symbol) => { return (g, n, vl) => {
 }; };
 
 const __sgf_node_line_markup_setter = (hasArrow) => { return (g, n, vl) => {
-    for(var raw in vl) {
+    for(var raw of vl) {
         var b = raw.split(':');
         if (b.length != 2)
             continue;
@@ -150,7 +150,7 @@ const __sgf_node_label_markup_setter = (g, n, vl) => {
     
     var ls = [];
     var c = 0;
-    for(var raw in vl) {
+    for(var raw of vl) {
         var pair = raw.split(':');
         switch(pair.length) {
             case 1:
@@ -205,9 +205,9 @@ const __SETTERS = {
     'W': (g, n, vl) => { n.color = 'W'; n.position = __sgf_parse_position_unsafe(vl[0]); },
 
     // setup stones
-    'AB': (g, n, vl) => __sgf_node_setupstones_setter('B'),
-    'AW': (g, n, vl) => __sgf_node_setupstones_setter('W'),
-    'AE': (g, n, vl) => __sgf_node_setupstones_setter(null),
+    'AB': __sgf_node_setupstones_setter('B'),
+    'AW': __sgf_node_setupstones_setter('W'),
+    'AE': __sgf_node_setupstones_setter(null),
 
     // annotations
     'DM': (g, n, vl) => {}, // unimplemented
@@ -222,12 +222,12 @@ const __SETTERS = {
     'TE': (g, n, vl) => {}, // unimplemented
 
     // markups
-    'AR': (g, n, vl) => __sgf_node_line_markup_setter(true),
-    'LN': (g, n, vl) => __sgf_node_line_markup_setter(false),
-    'CR': (g, n, vl) => __sgf_node_symbol_markup_setter('CR'),
-    'MA': (g, n, vl) => __sgf_node_symbol_markup_setter('MA'),
-    'SQ': (g, n, vl) => __sgf_node_symbol_markup_setter('SQ'),
-    'TR': (g, n, vl) => __sgf_node_symbol_markup_setter('TR'),
+    'AR': __sgf_node_line_markup_setter(true),
+    'LN': __sgf_node_line_markup_setter(false),
+    'CR': __sgf_node_symbol_markup_setter('CR'),
+    'MA': __sgf_node_symbol_markup_setter('MA'),
+    'SQ': __sgf_node_symbol_markup_setter('SQ'),
+    'TR': __sgf_node_symbol_markup_setter('TR'),
     'LB': __sgf_node_label_markup_setter,
     'RG': (g, n, vl) => {}, // unimplemented
 
